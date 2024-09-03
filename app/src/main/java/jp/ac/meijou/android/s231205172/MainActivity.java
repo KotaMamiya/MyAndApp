@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         prefDataStore = PrefDataStore.getInstance(this);
-        prefDataStore.getString("name").ifPresent(name -> binding.text.setText(name));
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -66,5 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 binding.text.setText(editable.toString());
             }
         });
+    }
+
+    protected  void  onStart(){
+        super.onStart();
+        prefDataStore.getString("name").ifPresent(name -> binding.text.setText(name));
     }
 }
